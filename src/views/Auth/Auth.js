@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-catch */
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import UserForm from '../../components/UserForm/UserForm';
 import { useUser } from '../../context/UserContext';
 import { signInUser, signUpUser } from '../../services/users';
@@ -24,5 +24,22 @@ export default function Auth({ isSigningUp = false }) {
     }
   };
 
-  return <UserForm onSubmit={handleLogin} label={isSigningUp ? 'Sign Up' : 'Sign In'} />;
+  return (
+    <section>
+      <h2>{isSigningUp ? 'Welcome!' : 'Welcome back!'}</h2>
+      <br />
+
+      <UserForm onSubmit={handleLogin} label={isSigningUp ? 'Sign Up' : 'Sign In'} />
+
+      {isSigningUp ? (
+        <p>
+          Already have an account? <Link to="/login">Sign In</Link>
+        </p>
+      ) : (
+        <p>
+          Need an account? <Link to="/register">Sign Up</Link>
+        </p>
+      )}
+    </section>
+  );
 }
