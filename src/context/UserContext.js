@@ -1,9 +1,11 @@
 import { createContext, useContext, useState } from 'react';
+import { getUser } from '../services/users';
 
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const userInfo = getUser();
+  const [user, setUser] = useState(userInfo ? { id: userInfo.id, email: userInfo.email } : {});
 
   return <UserContext.Provider value={{ user, setUser }}> {children} </UserContext.Provider>;
 };
