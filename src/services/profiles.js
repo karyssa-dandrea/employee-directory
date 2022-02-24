@@ -14,3 +14,8 @@ export async function createProfile({ name, email, bio, birthday }) {
   const request = await client.from('profiles').insert({ name, email, bio, birthday });
   return parseData(request);
 }
+
+export async function deleteProfileByEmail(email) {
+  const request = await client.from('profiles').delete().match({ email });
+  return parseData(request);
+}

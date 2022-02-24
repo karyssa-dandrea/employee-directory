@@ -22,17 +22,23 @@ export default function UserForm({ label, onSubmit }) {
       setFormError(error.message);
     }
   };
-
   return (
     <>
       {loading ? 'Loading' : ''}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={formState.email} onChange={handleFormChange} />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formState.email}
+          onChange={handleFormChange}
+        />
         <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
+          name="password"
           value={formState.password}
           onChange={handleFormChange}
         />
