@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { getProfile } from '../services/profiles';
 
 export const ProfileContext = createContext();
 
@@ -9,7 +10,22 @@ const ProfileProvider = ({ children }) => {
 
   const history = useHistory();
 
-  return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProfile();
+        setProfile(data);
+      } catch (error) {
+        history.replace('/profile/create');
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [history]);
+
+  const profileValue = { profile, setProfile, loading, setLoading };
+
+  return <ProfileContext.Provider value={profileValue}>{children}</ProfileContext.Provider>;
 };
 
 const useProfile = () => {
