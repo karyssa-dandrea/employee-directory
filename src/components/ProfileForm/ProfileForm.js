@@ -8,15 +8,15 @@ export default function ProfileForm({ handleCreate, handleEdit, updateProfileFor
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      handleCreate(name, email, birthday, bio);
+      handleCreate({ name, email, birthday, bio });
     } else {
-      handleEdit(name, email, birthday, bio);
+      handleEdit({ name, email, birthday, bio });
     }
   };
 
   return (
     <form>
-      {!profile.name && <h3>You must create a profile to continue!</h3>}
+      {!name && <h3>You must create a profile to continue!</h3>}
       <label>
         Name:
         <input
@@ -38,7 +38,7 @@ export default function ProfileForm({ handleCreate, handleEdit, updateProfileFor
         <input
           type="date"
           value={birthday}
-          onChange={(e) => updateProfileForm('date', e.target.value)}
+          onChange={(e) => updateProfileForm('birthday', e.target.value)}
         />
       </label>
       <label>

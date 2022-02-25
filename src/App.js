@@ -26,10 +26,10 @@ function App() {
               <Profile isCreatingProfile />
             </PrivateRoute>
             <PrivateRoute path="/profile/edit">
-              <ProfileForm />
+              <Profile />
             </PrivateRoute>
             <PrivateRoute exact path="/profile">
-              <Profile />
+              <Profile isNotEditing />
             </PrivateRoute>
             <Route path="/">
               <Home />

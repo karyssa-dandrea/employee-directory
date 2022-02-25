@@ -5,13 +5,13 @@ import ProfileView from '../../components/ProfileView/ProfileView';
 import { useProfile } from '../../context/ProfileContext';
 import { createProfile, updateProfile } from '../../services/profiles';
 
-export default function Profile({ isCreatingProfile = false }) {
+export default function Profile({ isCreatingProfile = false, isNotEditing = false }) {
   const { profile, setProfile, loading } = useProfile();
   const history = useHistory();
 
-  const handleCreate = async (name, email, birthday, bio) => {
+  const handleCreate = async ({ name, email, birthday, bio }) => {
     try {
-      const data = await createProfile({ name, email, bio, birthday });
+      const data = await createProfile({ name, email, birthday, bio });
       setProfile(data);
       history.replace('/profile');
     } catch (error) {
@@ -19,13 +19,13 @@ export default function Profile({ isCreatingProfile = false }) {
     }
   };
 
-  const handleEdit = async (name, email, bio, birthday) => {
+  const handleEdit = async ({ name, email, bio, birthday }) => {
     try {
       const [data] = await updateProfile({ name, email, bio, birthday });
       setProfile(data);
       history.push('/profile');
     } catch (error) {
-      throw new Error('Something went wrong! Please try again.');
+      throw new Error('Something went wrong! Please try again.', error);
     }
   };
 
@@ -38,7 +38,7 @@ export default function Profile({ isCreatingProfile = false }) {
 
   return (
     <div>
-      {profile ? (
+      {isNotEditing ? (
         <ProfileView profile={profile} />
       ) : (
         <ProfileForm
