@@ -1,12 +1,15 @@
 import React from 'react';
 import { useUser } from '../../context/UserContext';
 import AuthButton from '../AuthButton/AuthButton';
+import './Header.css';
 
 export default function Header() {
   const { user } = useUser();
   return (
     <>
       <header>
+        <img src="./assets/bees.webp" />
+        <h1> Honex Industries</h1>
         <p>
           {user?.email ? (
             <>

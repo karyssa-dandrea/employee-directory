@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
-// import { Route, Router } from 'react-router-dom';
 import Home from './views/Home/Home';
 import Auth from './views/Auth/Auth';
 import { UserProvider } from './context/UserContext';
+import Profile from './views/Profile/Profile';
 
 function App() {
   return (
@@ -17,6 +17,12 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Auth isSigningUp />
+          </Route>
+          <Route path="/profile/create">
+            <Profile isCreatingProfile />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
           </Route>
           <Route path="/">
             <Home />
