@@ -5,7 +5,7 @@ import ProfileView from '../../components/ProfileView/ProfileView';
 import { useProfile } from '../../context/ProfileContext';
 import { createProfile, updateProfile } from '../../services/profiles';
 
-export default function Profile({ isCreatingProfile = false, isNotEditing = false }) {
+export default function Profile({ isNotEditing = false }) {
   const { profile, setProfile, loading } = useProfile();
   const history = useHistory();
 

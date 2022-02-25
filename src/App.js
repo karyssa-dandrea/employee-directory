@@ -7,7 +7,6 @@ import { UserProvider } from './context/UserContext';
 import Profile from './views/Profile/Profile';
 import { ProfileProvider } from './context/ProfileContext';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
-import ProfileForm from './components/ProfileForm/ProfileForm';
 
 function App() {
   return (
