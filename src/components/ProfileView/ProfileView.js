@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useProfile } from '../../context/ProfileContext';
 
 export default function ProfileView() {
@@ -6,6 +7,8 @@ export default function ProfileView() {
     profile: { name, email, birthday, bio },
     loading,
   } = useProfile();
+
+  const history = useHistory();
 
   const handleSubmit = () => {
     history.push('/profile/edit');

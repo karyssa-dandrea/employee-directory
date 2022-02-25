@@ -6,6 +6,8 @@ import Auth from './views/Auth/Auth';
 import { UserProvider } from './context/UserContext';
 import Profile from './views/Profile/Profile';
 import { ProfileProvider } from './context/ProfileContext';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ProfileForm from './components/ProfileForm/ProfileForm';
 
 function App() {
   return (
@@ -20,12 +22,15 @@ function App() {
             <Route exact path="/register">
               <Auth isSigningUp />
             </Route>
-            <Route path="/profile/create">
+            <PrivateRoute path="/profile/create">
               <Profile isCreatingProfile />
-            </Route>
-            <Route exact path="/profile">
+            </PrivateRoute>
+            <PrivateRoute path="/profile/edit">
+              <ProfileForm />
+            </PrivateRoute>
+            <PrivateRoute exact path="/profile">
               <Profile />
-            </Route>
+            </PrivateRoute>
             <Route path="/">
               <Home />
             </Route>

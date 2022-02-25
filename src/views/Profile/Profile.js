@@ -6,7 +6,7 @@ import { useProfile } from '../../context/ProfileContext';
 import { createProfile, updateProfile } from '../../services/profiles';
 
 export default function Profile({ isCreatingProfile = false }) {
-  const { profile, setProfile, loading, setLoading } = useProfile();
+  const { profile, setProfile, loading } = useProfile();
   const history = useHistory();
 
   const handleCreate = async (name, email, birthday, bio) => {
@@ -29,6 +29,11 @@ export default function Profile({ isCreatingProfile = false }) {
     }
   };
 
+  const updateProfileForm = (key, value) => {
+    profile[key] = value;
+    setProfile({ ...profile });
+  };
+
   if (loading) return <h2>Loading Profile..</h2>;
 
   return (
@@ -36,7 +41,12 @@ export default function Profile({ isCreatingProfile = false }) {
       {profile ? (
         <ProfileView profile={profile} />
       ) : (
-        <ProfileForm profile={profile} handleCreate={handleCreate} handleEdit={handleEdit} />
+        <ProfileForm
+          profile={profile}
+          handleCreate={handleCreate}
+          handleEdit={handleEdit}
+          updateProfileForm={updateProfileForm}
+        />
       )}
     </div>
   );

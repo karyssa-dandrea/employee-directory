@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useProfile } from '../../context/ProfileContext';
 
-export default function ProfileForm({ profile, handleCreate }) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState();
-  const [birthday, setBirthday] = useState('');
-  const [bio, setBio] = useState('');
+export default function ProfileForm({ handleCreate, handleEdit, updateProfileForm }) {
+  const { profile } = useProfile();
+  const { name, email, birthday, bio } = profile;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCreate(name, email, birthday, bio);
+    if (!name) {
+      handleCreate(name, email, birthday, bio);
+    } else {
+      handleEdit(name, email, birthday, bio);
+    }
   };
 
   return (
@@ -16,19 +19,31 @@ export default function ProfileForm({ profile, handleCreate }) {
       {!profile.name && <h3>You must create a profile to continue!</h3>}
       <label>
         Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => updateProfileForm('name', e.target.value)}
+        />
       </label>
       <label>
         Email:
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => updateProfileForm('email', e.target.value)}
+        />
       </label>
       <label>
         Birthday:
-        <input type="date" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
+        <input
+          type="date"
+          value={birthday}
+          onChange={(e) => updateProfileForm('date', e.target.value)}
+        />
       </label>
       <label>
         Bio:
-        <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+        <textarea value={bio} onChange={(e) => updateProfileForm('bio', e.target.value)} />
       </label>
       <button onClick={handleSubmit}>Submit</button>
     </form>
